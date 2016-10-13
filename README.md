@@ -3,7 +3,7 @@ Cluster RBAC Policies
 I will list down all the RBAC Policies needed for the functioning of a Kube cluster with only the RBAC Authorizer below on a component by component basis
 
 **Default Role**
-Given to all users in the system, would help is discovery and regular read only operations
+Given to all users in the system, would help in discovery and common read only operations
 
 ```yaml
 kind: ClusterRole
