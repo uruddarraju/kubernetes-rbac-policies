@@ -1,0 +1,23 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1alpha1
+kind: ClusterRole
+metadata:
+  name: kube-proxy-role
+rules:
+  -
+    apiGroups:
+      - ""
+    nonResourceURLs: ["*"]
+    resources:
+      - endpoints
+      - events
+      - services
+      - nodes
+    verbs: ["get", "watch", "list"]
+  -
+    apiGroups:
+      - ""
+    nonResourceURLs: ["*"]
+    resources:
+      - events
+    verbs: ["*"]

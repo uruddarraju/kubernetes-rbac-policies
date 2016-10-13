@@ -1,0 +1,13 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1alpha1
+metadata:
+  name: scheduler
+rules:
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["*"]
+    nonResourceURLs: ["*"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["update"]
+    nonResourceURLs: []

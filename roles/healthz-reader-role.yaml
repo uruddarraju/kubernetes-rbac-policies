@@ -1,0 +1,12 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1alpha1
+kind: ClusterRole
+metadata:
+  name: healthz-reader-role
+rules:
+  -
+    apiGroups:
+      - ""
+    nonResourceURLs: ["*"]
+    resources: []
+    verbs: ["get"]
