@@ -1,0 +1,18 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1alpha1
+metadata:
+  # "namespace" omitted since ClusterRoles are not namespaced.
+  name: default-reader
+rules:
+  - apiGroups: [""]
+    resources:
+      - componentstatuses
+      - events
+      - endpoints
+      - namespaces
+      - nodes
+      - persistentvolumes
+      - resourcequotas
+      - services
+    verbs: ["get", "watch", "list"]
+    nonResourceURLs: ["*"]

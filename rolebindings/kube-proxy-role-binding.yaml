@@ -1,0 +1,12 @@
+# This cluster role binding allows anyone in the "manager" group to read secrets in any namespace.
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1alpha1
+metadata:
+  name: kubeproxy-role-binding
+subjects:
+  - kind: User
+    name: kube_proxy
+roleRef:
+  kind: ClusterRole
+  name: kube-proxy-role
+  apiVersion: rbac.authorization.k8s.io/v1alpha1
