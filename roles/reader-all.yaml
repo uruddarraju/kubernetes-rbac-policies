@@ -13,7 +13,6 @@ rules:
       - extensions
       - policy
       - rbac.authorization.k8s.io
-      - tess.io
     nonResourceURLs: ["*"]
     resources:
       - componentstatuses
