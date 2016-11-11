@@ -22,7 +22,8 @@ rules:
       - resourcequotas
       - services
     verbs: ["get", "watch", "list"]
-    nonResourceURLs: ["*"]
+  - nonResourceURLs: ["*"]
+    verbs: ["get", "watch", "list"]
 ```
 Appropriate binding would be:
 ```yaml
@@ -57,7 +58,6 @@ rules:
       - extensions
       - policy
       - rbac.authorization.k8s.io
-    nonResourceURLs: ["*"]
     resources:
       - componentstatuses
       - configmaps
@@ -83,6 +83,12 @@ rules:
       - get
       - watch
       - list
+  - nonResourceURLs: ["*"]
+    verbs:
+      - get
+      - watch
+      - list
+
 ```
 
 **Cluster Administrator**
@@ -102,7 +108,6 @@ rules:
       - extensions
       - policy
       - rbac.authorization.k8s.io
-    nonResourceURLs: ["*"]
     resources:
       - componentstatuses
       - configmaps
@@ -125,6 +130,8 @@ rules:
       - serviceaccounts
       - services
     verbs: ["*"]
+  - nonResourceURLs: ["*"]
+    verbs: ["*"]
 ```
 
 **Controller Manager**
@@ -140,8 +147,9 @@ rules:
     apiGroups:
       # have access to everything except Secrets
       - "*"
-    nonResourceURLs: ["*"]
     resources: ["*"]
+    verbs: ["*"]
+  - nonResourceURLs: ["*"]
     verbs: ["*"]
 ```
 
@@ -153,36 +161,44 @@ apiVersion: rbac.authorization.k8s.io/v1alpha1
 kind: ClusterRole
 metadata: 
   name: kubelet-runtime
-rules: 
-  - 
-    apiGroups: 
-      - ""
-    nonResourceURLs: 
-      - "*"
-    resources: 
-      - configmaps
-      - persistentvolumes
-      - persistentvolumeclaims
-      - secrets
-      - services
-      - healthz
-    verbs: 
-      - get
-      - watch
-      - list
-  - 
-    apiGroups: 
-      - ""
-    nonResourceURLs: 
-      - "*"
-    resources: 
-      - events
-      - nodes
-      - nodes/status
-      - pods
-      - pods/status
-    verbs: 
-      - "*"
+rules:
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - configmaps
+  - persistentvolumes
+  - persistentvolumeclaims
+  - secrets
+  - services
+  - healthz
+  verbs:
+  - get
+  - watch
+  - list
+- attributeRestrictions: null
+  nonResourceURLs:
+  - '*'
+  verbs:
+  - get
+  - watch
+  - list
+- apiGroups:
+  - ""
+  attributeRestrictions: null
+  resources:
+  - events
+  - nodes
+  - nodes/status
+  - pods
+  - pods/status
+  verbs:
+  - '*'
+- attributeRestrictions: null
+  nonResourceURLs:
+  - '*'
+  verbs:
+  - '*'
 ```
 
 The appropriate binding would be:
@@ -210,8 +226,9 @@ rules:
   -
     apiGroups:
       - ""
-    nonResourceURLs: ["*"]
     resources: []
+    verbs: ["get"]
+  - nonResourceURLs: ["*"]
     verbs: ["get"]
 ```
 The reason we made this explicit healthz binding is to make sure only the healthz is allowed access by everyone. Not only kubelet, but other monitoring systems can usee healthz in the future and hence granting access to all users
@@ -241,11 +258,13 @@ rules:
   - apiGroups: [""]
     resources: ["endpoints"]
     verbs: ["*"]
-    nonResourceURLs: ["*"]
+  - nonResourceURLs: ["*"]
+    verbs: ["*"]
   - apiGroups: [""]
     resources: ["pods"]
     verbs: ["update"]
-    nonResourceURLs: []
+    nonResourceURLs: [""]
+    verbs: ["*"]
 ```
 
 needs the following role bindings:
@@ -289,19 +308,21 @@ rules:
   -
     apiGroups:
       - ""
-    nonResourceURLs: ["*"]
     resources:
       - endpoints
       - events
       - services
       - nodes
     verbs: ["get", "watch", "list"]
+  - nonResourceURLs: ["*"]
+    verbs: ["get", "watch", "list"]
   -
     apiGroups:
       - ""
-    nonResourceURLs: ["*"]
     resources:
       - events
+    verbs: ["*"]
+  - nonResourceURLs: ["*"]
     verbs: ["*"]
 ```
 
@@ -332,19 +353,21 @@ rules:
   -
     apiGroups:
       - ""
-    nonResourceURLs: ["*"]
     resources:
       - endpoints
       - events
       - services
       - nodes
     verbs: ["get", "watch", "list"]
+  - nonResourceURLs: ["*"]
+    verbs: ["get", "watch", "list"]
   -
     apiGroups:
       - ""
-    nonResourceURLs: ["*"]
     resources:
       - events
+    verbs: ["*"]
+  - nonResourceURLs: ["*"]
     verbs: ["*"]
 
 ```

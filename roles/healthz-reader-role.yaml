@@ -7,6 +7,8 @@ rules:
   -
     apiGroups:
       - ""
-    nonResourceURLs: ["*"]
-    resources: []
+    resources: [""]
     verbs: ["get"]
+  - nonResourceURLs: ["*"]
+    verbs: ["get"]
+
