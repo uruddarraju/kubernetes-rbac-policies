@@ -6,7 +6,6 @@ metadata:
 rules:
   - apiGroups:
       - ""
-    nonResourceURLs: ["*"]
     resources:
       - configmaps
       - persistentvolumes
@@ -15,9 +14,10 @@ rules:
       - services
       - healthz
     verbs: ["get", "watch", "list"]
+  - nonResourceURLs: ["*"]
+    verbs: ["get", "watch", "list"]
   - apiGroups:
       - ""
-    nonResourceURLs: ["*"]
     resources:
       - events
       - nodes
@@ -25,3 +25,6 @@ rules:
       - pods
       - pods/status
     verbs: ["*"]
+  - nonResourceURLs: ["*"]
+    verbs: ["*"]
+

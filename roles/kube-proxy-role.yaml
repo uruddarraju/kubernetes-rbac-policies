@@ -7,17 +7,21 @@ rules:
   -
     apiGroups:
       - ""
-    nonResourceURLs: ["*"]
     resources:
       - endpoints
       - events
       - services
       - nodes
     verbs: ["get", "watch", "list"]
+  - nonResourceURLs: ["*"]
+    verbs: ["get", "watch", "list"]
+
   -
     apiGroups:
       - ""
-    nonResourceURLs: ["*"]
     resources:
       - events
     verbs: ["*"]
+  - nonResourceURLs: ["*"]
+    verbs: ["*"]
+

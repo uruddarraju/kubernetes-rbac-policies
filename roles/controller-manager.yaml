@@ -8,6 +8,8 @@ rules:
     apiGroups:
       # have access to everything except Secrets
       - "*"
-    nonResourceURLs: []
     resources: ["*"]
     verbs: ["*"]
+  - nonResourceURLs: [""]
+    verbs: ["*"]
+

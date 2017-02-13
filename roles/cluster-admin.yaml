@@ -13,7 +13,6 @@ rules:
       - extensions
       - policy
       - rbac.authorization.k8s.io
-    nonResourceURLs: ["*"]
     # Everything except secrets
     resources:
       - componentstatuses
@@ -37,3 +36,6 @@ rules:
       - serviceaccounts
       - services
     verbs: ["*"]
+  - nonResourceURLs: ["*"]
+    verbs: ["*"]
+

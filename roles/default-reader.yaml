@@ -15,4 +15,5 @@ rules:
       - resourcequotas
       - services
     verbs: ["get", "watch", "list"]
-    nonResourceURLs: ["*"]
+  - nonResourceURLs: ["*"]
+    verbs: ["get", "watch", "list"]
